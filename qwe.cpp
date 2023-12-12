@@ -1,3 +1,5 @@
+\\输入身份证，按年龄排序
+
 #define _CRT_SECURE_NO_WARNINGS
 #include<bits/stdc++.h>
 int birthday(char s[]) {
