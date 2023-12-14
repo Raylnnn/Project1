@@ -38,3 +38,53 @@ int main() {
 	}
 	return 0;
 }
+
+//7-9 最长的单词
+输入一个字符串，将此字符串中最长的单词输出。要求至少使用一个自定义函数。
+输入格式:
+测试数据有多组，处理到文件尾。每组测试数据输入一个字符串（长度不超过80）。
+输出格式:
+对于每组测试，输出字符串中的最长单词，若有多个长度相等的最长单词，输出最早出现的那个。这里规定，单词只能由大小写英文字母构成。
+输入样例:
+Keywords insert, two way insertion sort,
+Abstract This paper discusses three method for two way insertion
+words. insert, two way sorted.
+You're a boy.
+I'am a c.
+输出样例:
+insertion
+discusses
+insert
+You
+am
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+void f(char* a) {
+	int i, j, max = 0, n, cnt[0x3f3f] = { 0 };
+	for (i = 0; a[i] != '\n'; i++) {
+		if (a[i] >= 'A' && a[i] <= 'Z' || a[i] >= 'a' && a[i] <= 'z') {
+			for (j = i; a[j] >= 'A' && a[j] <= 'Z' || a[j] >= 'a' && a[j] <= 'z'; j++);
+			cnt[i] = j - i;
+			i = j - 1;
+		}
+	}
+
+	for (i = 0; a[i] != '\n'; i++) {
+		if (cnt[i] > cnt[max]) max = i;
+	}
+	for (i = max; a[i] >= 'A' && a[i] <= 'Z' || a[i] >= 'a' && a[i] <= 'z'; i++) {
+		printf("%c", a[i]);
+	}
+	printf("\n");
+
+}
+int main() {
+	char a[0x3f3f];
+
+	while (fgets(a, 0x3f3f, stdin)) {
+		f(a);
+
+	}
+	return 0;
+}
