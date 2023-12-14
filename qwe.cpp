@@ -39,7 +39,7 @@ int main() {
 	return 0;
 }
 
-//7-9 最长的单词
+\*7-9 最长的单词
 输入一个字符串，将此字符串中最长的单词输出。要求至少使用一个自定义函数。
 输入格式:
 测试数据有多组，处理到文件尾。每组测试数据输入一个字符串（长度不超过80）。
@@ -56,7 +56,7 @@ insertion
 discusses
 insert
 You
-am
+am *\
 
 #define _CRT_SECURE_NO_WARNINGS
 #include<bits/stdc++.h>
