@@ -88,3 +88,105 @@ int main() {
 	}
 	return 0;
 }
+
+\\舍入问题完整版（函数）
+double power(double a, int p) {
+    double ret = 1.0,  j = 0;
+
+    if (p < 0) { p *= -1; j = 1; }
+    do {
+        if (p & 1) ret *= a * 1.0;
+        p /= 2;
+        a *= a;
+
+    } while (p > 0);
+
+    if (j == 0) return ret;
+    else return 1.0 / ret;
+}
+
+double Round(double x, int d) {
+    double i = power(10, d);
+    int j;
+    if (x < 0) j = x * i - 0.5;
+    else j = x * i + 0.5;
+    return j * 1.0 / i;
+}
+
+\\螺旋方阵
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+
+int main() {
+	int a[0x3f][0x3f], b, c[0x3f], i=0, j=0, f = 0, sum = 0, m, n, max[0x3f], t, k[0x3f];
+	scanf("%d", &n);
+	m = 1;
+	t = n;
+	do {
+		for (; j < n && m <= t * t; j++) {
+			a[i][j] = m;
+			m++;
+		}
+		j--;
+		i++;
+		for (; i < n && m <= t * t; i++) {
+			a[i][j] = m;
+			m++;
+		}
+		i--;
+		j--;
+		for (; j >= t - n && m <= t * t; j--) {
+			a[i][j] = m;
+			m++;
+		}
+		j++;
+		i--;
+		for (; i > t - n && m <= t * t; i--) {
+			a[i][j] = m;
+			m++;
+		}
+		i++;
+		j++;
+	} while (--n);
+	for (i = 0; i < t; i++) {
+		for (j = 0; j < t; j++) {
+			printf("%3d", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
+}
+
+\\问题在哪？（school OJ）
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+char* insert(char* str, char c) {
+	char* strr = str;
+	char* p = strr;
+	int f = 0,i=0;
+	while (*str) {
+		if (c <= *str&&f==0) {
+			f = 1;
+			*strr = c;
+			strr++;
+			continue;
+		}else{
+			*strr = *str;
+			str++;
+			strr++;
+		}
+	}
+	if (f == 0) { *strr = c; strr++; }
+	*strr = '\0';
+	return p;
+}
+int main() {
+	char str[55], c;
+	scanf("%s", str);
+	getchar();
+	scanf("%c", &c);
+	printf("%s", insert(str, c));
+	return 0;
+}
+
