@@ -190,3 +190,98 @@ int main() {
 	return 0;
 }
 
+\\加密文件 eg.feather->a:f,b:e,c:a,...h:z,i:y,...
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+int main() {
+	FILE* p1, * p2;
+	char* pas, * a,t,*str;
+	a = (char*)malloc(100);
+	pas = (char*)malloc(100);
+	str = (char*)malloc(10000);
+	int i, j, k=0,f;
+	scanf("%s", a);
+	for (i = 0; i < strlen(a); i++) {
+		f = 0;
+		for (j = i-1; j >=0; j--) {
+			if (a[i] == a[j]) {
+				f = 1; break;
+			}
+		}
+		if (!f) {
+			pas[k] = a[i]; k++;
+		}
+	}
+	pas[k] = '\0'; t = 'z';
+	int l = strlen(pas);
+	for (; t>='a'; t--) {
+		f = 0;
+		for (j = 0; j <l; j++) {
+			if (pas[j] == t) {
+				f = 1; break;
+			}
+		}
+		if (!f) {
+			pas[k] = t;  k++;
+		}
+	}
+	pas[k] = '\0';
+	if ((p1 = fopen("encrypt.txt", "r")) == NULL) {
+		printf("Error\n");
+		exit(0);
+	}
+	if ((p2 = fopen("output.txt", "w")) == NULL) {
+		printf("Error\n");
+		exit(0);
+	}
+	fgets(str, 10000, p1);
+	for (i = 0; i < strlen(str); i++) {
+		if (str[i] >= 'a' && str[i] <= 'z') {
+			str[i] = pas[str[i] - 'a'];
+		}
+	}
+	fputs(str, p2);
+	fclose(p1);
+	fclose(p2);
+	free(a);
+	free(pas);
+	free(str);
+	return 0;
+}
+
+\\整数的N进制转化
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+void itob(int n, char* s, int b) {
+	int i = 0,j,N,a;
+	N = n;
+	if (n < 0) n *= -1;
+	do{
+		j = n % b;
+		if (j <= 9) s[i] = j + '0';
+		else s[i] = j - 10 + 'a';
+		i++;
+		n /= b;
+	} while (n > 0);
+	if (N < 0) {
+		s[i] = '-'; i++;
+	}
+	s[i] = '\0';
+	for (j = 0; j < strlen(s) / 2; j++) {
+		a = s[j];
+		s[j] = s[--i];
+		s[i] = a;
+
+	}
+}
+int main() {
+	int n, b;
+	char s[0x3f];
+	scanf("%d%d", &n, &b);
+	itob(n, s, b);
+	int i = 0;
+	for (; i < strlen(s); i++) {
+		printf("%c", s[i]);
+	}
+	return 0;
+}
